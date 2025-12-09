@@ -2,6 +2,7 @@ import uuid
 
 from pydantic import EmailStr
 from sqlmodel import Field, Relationship, SQLModel
+from .tennis import Match, Player, PlayerStats
 
 
 # Shared properties

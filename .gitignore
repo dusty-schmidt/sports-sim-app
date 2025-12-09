@@ -4,3 +4,17 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv
+venv/
+ENV/
+env/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,3 +1,4 @@
+import { ErrorBoundary } from "react-error-boundary"
 import {
   MutationCache,
   QueryCache,
@@ -42,11 +43,13 @@ declare module "@tanstack/react-router" {
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <Toaster richColors closeButton />
-      </QueryClientProvider>
-    </ThemeProvider>
+    <ErrorBoundary fallbackRender={({ error }) => <div className="p-4 text-red-600"><h1>Application Error</h1><pre>{error.message}</pre><pre>{error.stack}</pre></div>}>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+          <Toaster richColors closeButton />
+        </QueryClientProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
   </StrictMode>,
 )

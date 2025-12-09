@@ -15,7 +15,9 @@ import { Route as RecoverPasswordRouteImport } from './routes/recover-password'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LayoutRouteImport } from './routes/_layout'
 import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
+import { Route as LayoutSimulatorRouteImport } from './routes/_layout/simulator'
 import { Route as LayoutSettingsRouteImport } from './routes/_layout/settings'
+import { Route as LayoutMatchesRouteImport } from './routes/_layout/matches'
 import { Route as LayoutItemsRouteImport } from './routes/_layout/items'
 import { Route as LayoutAdminRouteImport } from './routes/_layout/admin'
 
@@ -48,9 +50,19 @@ const LayoutIndexRoute = LayoutIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LayoutRoute,
 } as any)
+const LayoutSimulatorRoute = LayoutSimulatorRouteImport.update({
+  id: '/simulator',
+  path: '/simulator',
+  getParentRoute: () => LayoutRoute,
+} as any)
 const LayoutSettingsRoute = LayoutSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutMatchesRoute = LayoutMatchesRouteImport.update({
+  id: '/matches',
+  path: '/matches',
   getParentRoute: () => LayoutRoute,
 } as any)
 const LayoutItemsRoute = LayoutItemsRouteImport.update({
@@ -71,7 +83,9 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/admin': typeof LayoutAdminRoute
   '/items': typeof LayoutItemsRoute
+  '/matches': typeof LayoutMatchesRoute
   '/settings': typeof LayoutSettingsRoute
+  '/simulator': typeof LayoutSimulatorRoute
   '/': typeof LayoutIndexRoute
 }
 export interface FileRoutesByTo {
@@ -81,7 +95,9 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/admin': typeof LayoutAdminRoute
   '/items': typeof LayoutItemsRoute
+  '/matches': typeof LayoutMatchesRoute
   '/settings': typeof LayoutSettingsRoute
+  '/simulator': typeof LayoutSimulatorRoute
   '/': typeof LayoutIndexRoute
 }
 export interface FileRoutesById {
@@ -93,7 +109,9 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/_layout/admin': typeof LayoutAdminRoute
   '/_layout/items': typeof LayoutItemsRoute
+  '/_layout/matches': typeof LayoutMatchesRoute
   '/_layout/settings': typeof LayoutSettingsRoute
+  '/_layout/simulator': typeof LayoutSimulatorRoute
   '/_layout/': typeof LayoutIndexRoute
 }
 export interface FileRouteTypes {
@@ -105,7 +123,9 @@ export interface FileRouteTypes {
     | '/signup'
     | '/admin'
     | '/items'
+    | '/matches'
     | '/settings'
+    | '/simulator'
     | '/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -115,7 +135,9 @@ export interface FileRouteTypes {
     | '/signup'
     | '/admin'
     | '/items'
+    | '/matches'
     | '/settings'
+    | '/simulator'
     | '/'
   id:
     | '__root__'
@@ -126,7 +148,9 @@ export interface FileRouteTypes {
     | '/signup'
     | '/_layout/admin'
     | '/_layout/items'
+    | '/_layout/matches'
     | '/_layout/settings'
+    | '/_layout/simulator'
     | '/_layout/'
   fileRoutesById: FileRoutesById
 }
@@ -182,11 +206,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutIndexRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/simulator': {
+      id: '/_layout/simulator'
+      path: '/simulator'
+      fullPath: '/simulator'
+      preLoaderRoute: typeof LayoutSimulatorRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_layout/settings': {
       id: '/_layout/settings'
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof LayoutSettingsRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/matches': {
+      id: '/_layout/matches'
+      path: '/matches'
+      fullPath: '/matches'
+      preLoaderRoute: typeof LayoutMatchesRouteImport
       parentRoute: typeof LayoutRoute
     }
     '/_layout/items': {
@@ -209,14 +247,18 @@ declare module '@tanstack/react-router' {
 interface LayoutRouteChildren {
   LayoutAdminRoute: typeof LayoutAdminRoute
   LayoutItemsRoute: typeof LayoutItemsRoute
+  LayoutMatchesRoute: typeof LayoutMatchesRoute
   LayoutSettingsRoute: typeof LayoutSettingsRoute
+  LayoutSimulatorRoute: typeof LayoutSimulatorRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutAdminRoute: LayoutAdminRoute,
   LayoutItemsRoute: LayoutItemsRoute,
+  LayoutMatchesRoute: LayoutMatchesRoute,
   LayoutSettingsRoute: LayoutSettingsRoute,
+  LayoutSimulatorRoute: LayoutSimulatorRoute,
   LayoutIndexRoute: LayoutIndexRoute,
 }
 

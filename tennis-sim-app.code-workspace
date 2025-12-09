@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../DEV-DOCS"
+		}
+	],
+	"settings": {
+		"powershell.cwd": "full-stack-fastapi-template"
+	}
+}

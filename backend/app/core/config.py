@@ -36,6 +36,9 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
     FRONTEND_HOST: str = "http://localhost:5173"
     ENVIRONMENT: Literal["local", "staging", "production"] = "local"
+    
+    CELERY_BROKER_URL: str = "redis://redis:6379/0"
+    CELERY_RESULT_BACKEND: str = "redis://redis:6379/0"
 
     BACKEND_CORS_ORIGINS: Annotated[
         list[AnyUrl] | str, BeforeValidator(parse_cors)
@@ -52,13 +55,19 @@ class Settings(BaseSettings):
     SENTRY_DSN: HttpUrl | None = None
     POSTGRES_SERVER: str
     POSTGRES_PORT: int = 5432
-    POSTGRES_USER: str
+    POSTGRES_USER: str = "postgres"
     POSTGRES_PASSWORD: str = ""
     POSTGRES_DB: str = ""
 
+    USE_SQLITE: bool = False
+
     @computed_field  # type: ignore[prop-decorator]
     @property
-    def SQLALCHEMY_DATABASE_URI(self) -> PostgresDsn:
+    def SQLALCHEMY_DATABASE_URI(self) -> PostgresDsn | str:
+        if self.USE_SQLITE:
+            self.CELERY_BROKER_URL = "memory://"
+            self.CELERY_RESULT_BACKEND = "db+sqlite:///./celery.db"
+            return "sqlite:///./sql_app.db"
         return PostgresDsn.build(
             scheme="postgresql+psycopg",
             username=self.POSTGRES_USER,

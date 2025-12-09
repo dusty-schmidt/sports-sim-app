@@ -35,6 +35,19 @@ export type ItemUpdate = {
     description?: (string | null);
 };
 
+export type Match = {
+    id?: string;
+    player1_name: string;
+    player2_name: string;
+    start_time: string;
+    surface?: string;
+    p1_odds?: number;
+    p2_odds?: number;
+    market_vig?: number;
+    last_simulated_at?: (string | null);
+    sim_win_prob_p1?: (number | null);
+};
+
 export type Message = {
     message: string;
 };
@@ -164,6 +177,19 @@ export type LoginRecoverPasswordHtmlContentData = {
 };
 
 export type LoginRecoverPasswordHtmlContentResponse = (string);
+
+export type MatchesReadMatchesData = {
+    limit?: number;
+    skip?: number;
+};
+
+export type MatchesReadMatchesResponse = (Array<Match>);
+
+export type MatchesTriggerSimulationData = {
+    matchId: string;
+};
+
+export type MatchesTriggerSimulationResponse = (unknown);
 
 export type PrivateCreateUserData = {
     requestBody: PrivateUserCreate;

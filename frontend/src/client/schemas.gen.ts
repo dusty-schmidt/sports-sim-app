@@ -182,6 +182,75 @@ export const ItemsPublicSchema = {
     title: 'ItemsPublic'
 } as const;
 
+export const MatchSchema = {
+    properties: {
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        },
+        player1_name: {
+            type: 'string',
+            title: 'Player1 Name'
+        },
+        player2_name: {
+            type: 'string',
+            title: 'Player2 Name'
+        },
+        start_time: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Start Time'
+        },
+        surface: {
+            type: 'string',
+            title: 'Surface',
+            default: 'Hard'
+        },
+        p1_odds: {
+            type: 'integer',
+            title: 'P1 Odds',
+            default: -110
+        },
+        p2_odds: {
+            type: 'integer',
+            title: 'P2 Odds',
+            default: -110
+        },
+        market_vig: {
+            type: 'number',
+            title: 'Market Vig',
+            default: 0.045
+        },
+        last_simulated_at: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Last Simulated At'
+        },
+        sim_win_prob_p1: {
+            anyOf: [
+                {
+                    type: 'number'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Sim Win Prob P1'
+        }
+    },
+    type: 'object',
+    required: ['player1_name', 'player2_name', 'start_time'],
+    title: 'Match'
+} as const;
+
 export const MessageSchema = {
     properties: {
         message: {
